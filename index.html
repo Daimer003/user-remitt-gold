@@ -64,18 +64,19 @@
       }
 
       .nav-item {
-            display: flex;
-            align-items: center;
-            color: var(--text);
-            text-decoration: none;
-            transition: all 0.3s ease;
-            border-left: 3px solid transparent;
-        }
-        
-        .nav-item:hover, .nav-item.active {
-            background-color: rgba(247, 195, 95, 0.1);
-            border-left: 3px solid var(--primary);
-        }
+        display: flex;
+        align-items: center;
+        color: var(--text);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border-left: 3px solid transparent;
+      }
+
+      .nav-item:hover,
+      .nav-item.active {
+        background-color: rgba(247, 195, 95, 0.1);
+        border-left: 3px solid var(--primary);
+      }
 
       .sidebar-icon .icon {
         font-size: 24px;
@@ -428,35 +429,42 @@
           <div class="icon">🔄</div>
           <span>Staking</span>
         </div>
-        <a href="index.html" >
+        <a href="index.html">
           <div class="sidebar-icon active">
             <div class="icon">🏠</div>
             <span>Dashboard</span>
           </div>
         </a>
-        <a href="buy-updated.html" >
-          <div class="sidebar-icon ">
+        <a href="buy-updated.html">
+          <div class="sidebar-icon">
             <div class="icon">🪙</div>
             <span>Buy Gold</span>
           </div>
         </a>
 
-        <a href="gold-sell.html">
+        <a href="sell-multiple.html">
           <div class="sidebar-icon">
             <div class="icon">💸</div>
             <span>Sell Gold</span>
           </div>
         </a>
         <div class="sidebar-divider"></div>
-
-        <div class="sidebar-icon">
-          <div class="icon">📁</div>
-          <span>Gold Ingots</span>
-        </div>
+        <a href="ingot-details.html">
+          <div class="sidebar-icon">
+            <div class="icon">📁</div>
+            <span>Gold Ingots</span>
+          </div>
+        </a>
         <div class="sidebar-icon">
           <div class="icon">📈</div>
           <span>Market</span>
         </div>
+        <a href="transaction-history.html">
+          <div class="sidebar-icon">
+            <div class="icon">📋</div>
+            <span>Transactions</span>
+          </div>
+        </a>
         <div class="sidebar-icon">
           <div class="icon">💬</div>
           <span>Support</span>

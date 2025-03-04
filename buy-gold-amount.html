@@ -484,27 +484,24 @@
                 <div class="icon">🔄</div>
                 <span>Staking</span>
             </div>
-            <div class="sidebar-icon">
-                <div class="icon">🏠</div>
-                <span>Dashboard</span>
-            </div>
+            <a href="index.html" class="nav-item active">
+                <div class="sidebar-icon">
+                    <div class="icon">🏠</div>
+                    <span>Dashboard</span>
+                </div>
+            </a>
+            <a href="buy-gold-amount.html" class="nav-item active">
             <div class="sidebar-icon active">
                 <div class="icon">🪙</div>
                 <span>Buy Gold</span>
             </div>
+            </a>
             <div class="sidebar-icon">
                 <div class="icon">💸</div>
                 <span>Sell Gold</span>
             </div>
             <div class="sidebar-divider"></div>
-            <div class="sidebar-icon">
-                <div class="icon">📊</div>
-                <span>Analytics</span>
-            </div>
-            <div class="sidebar-icon">
-                <div class="icon">💰</div>
-                <span>Wallet</span>
-            </div>
+      
             <div class="sidebar-icon">
                 <div class="icon">📁</div>
                 <span>Gold Ingots</span>
@@ -577,7 +574,7 @@
                                 <div class="ingot-info">
                                     <div class="ingot-id">ID: #A12493</div>
                                     <div class="ingot-name">Swiss Gold Bar</div>
-                                    <div class="ingot-available">Available: 850.25g</div>
+                                    <div class="ingot-available">Available: 850.2g</div>
                                 </div>
                             </div>
 
@@ -589,7 +586,7 @@
                                 <div class="ingot-info">
                                     <div class="ingot-id">ID: #B78512</div>
                                     <div class="ingot-name">London Gold Bar</div>
-                                    <div class="ingot-available">Available: 1250.75g</div>
+                                    <div class="ingot-available">Available: 1250.7g</div>
                                 </div>
                             </div>
 
@@ -601,7 +598,7 @@
                                 <div class="ingot-info">
                                     <div class="ingot-id">ID: #X39156</div>
                                     <div class="ingot-name">Dubai Gold Bar</div>
-                                    <div class="ingot-available">Available: 500.00g</div>
+                                    <div class="ingot-available">Available: 500.0g</div>
                                 </div>
                             </div>
                         </div>
@@ -613,17 +610,17 @@
                             <!-- Toggle between Dollar or Gold amount -->
                             <div class="toggle-container" style="display: flex; justify-content: center; margin-bottom: 20px;">
                                 <div class="toggle-options" style="display: flex; background-color: var(--card-bg); border-radius: 10px; overflow: hidden; border: 1px solid var(--border-color);">
-                                    <div class="toggle-option active" style="padding: 10px 20px; cursor: pointer; background-color: var(--primary-blue); color: white; font-weight: 600;">
+                                    <div class="toggle-option" style="padding: 10px 20px; cursor: pointer; font-weight: 600;">
                                         Enter USD Amount
                                     </div>
-                                    <div class="toggle-option" style="padding: 10px 20px; cursor: pointer; font-weight: 600;">
+                                    <div class="toggle-option active" style="padding: 10px 20px; cursor: pointer; background-color: var(--primary-blue); color: white; font-weight: 600;">
                                         Enter Gold Amount
                                     </div>
                                 </div>
                             </div>
                             
-                            <!-- USD Amount Input (shown by default) -->
-                            <div class="usd-input-container">
+                            <!-- USD Amount Input (hidden) -->
+                            <div class="usd-input-container" style="display: none;">
                                 <div class="amount-input">
                                     <div class="amount-label">USD Amount:</div>
                                     <div class="amount-field">
@@ -644,8 +641,8 @@
                                 </div>
                             </div>
                             
-                            <!-- Gold Amount Input (hidden by default) -->
-                            <div class="gold-input-container" style="display: none;">
+                            <!-- Gold Amount Input (visible by default) -->
+                            <div class="gold-input-container">
                                 <div class="amount-input">
                                     <div class="amount-label">Gold Amount:</div>
                                     <div class="amount-field">
@@ -683,7 +680,7 @@
                     </div>
                     <div class="summary-item">
                         <div class="summary-label">Gold Amount:</div>
-                        <div class="summary-value">25.00 grams</div>
+                        <div class="summary-value">25.0 grams</div>
                     </div>
                     <div class="summary-item">
                         <div class="summary-label">Gold Price:</div>
@@ -718,7 +715,7 @@
                         <div class="modal-close">×</div>
                     </div>
                     <div class="modal-content">
-                        <p>You are about to purchase <strong>25.00 grams</strong> of gold from <strong>Swiss Gold Bar</strong> for a total of <strong>$1,725.00 USDT</strong>.</p>
+                        <p>You are about to purchase <strong>25.0 grams</strong> of gold from <strong>Swiss Gold Bar</strong> for a total of <strong>$1,725.00 USDT</strong>.</p>
                         <p>Please confirm this transaction. After confirmation, the payment will be processed and an NFT will be minted to your wallet.</p>
                     </div>
                     <div class="modal-actions">
@@ -727,3 +724,7 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</body>
+</html>

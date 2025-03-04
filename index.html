@@ -1,601 +1,622 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Remitt Gold - Dashboard</title>
     <style>
-        :root {
-            --primary-blue: #3e8ede;
-            --dark-blue: #2166b9;
-            --light-blue: #87c4ff;
-            --bg-color: #f5f7fa;
-            --card-bg: #ffffff;
-            --text-dark: #333333;
-            --text-light: #777777;
-            --border-color: #e0e0e0;
-            --action-color: #00d8d8;
-            --danger-color: #ff6b6b;
-            --success-color: #4cd964;
-        }
+      :root {
+        --primary-blue: #3e8ede;
+        --dark-blue: #2166b9;
+        --light-blue: #87c4ff;
+        --bg-color: #f5f7fa;
+        --card-bg: #ffffff;
+        --text-dark: #333333;
+        --text-light: #777777;
+        --border-color: #e0e0e0;
+        --action-color: #00d8d8;
+        --danger-color: #ff6b6b;
+        --success-color: #4cd964;
+      }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            padding: 0;
-            margin: 0;
-        }
+      a {
+        text-decoration: none;
+      }
 
-        .container {
-            display: flex;
-            min-height: 100vh;
-        }
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-dark);
+        padding: 0;
+        margin: 0;
+      }
 
-        /* Sidebar */
-        .sidebar {
-            width: 220px;
-            background-color: var(--primary-blue);
-            display: flex;
-            flex-direction: column;
-            padding: 20px 0;
-        }
+      .container {
+        display: flex;
+        min-height: 100vh;
+      }
 
-        .sidebar-icon {
-            display: flex;
-            align-items: center;
-            padding: 12px 20px;
-            margin: 5px 10px;
-            border-radius: 10px;
-            font-size: 16px;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+      /* Sidebar */
+      .sidebar {
+        width: 220px;
+        background-color: var(--primary-blue);
+        display: flex;
+        flex-direction: column;
+        padding: 20px 0;
+      }
 
-        .sidebar-icon .icon {
-            font-size: 24px;
-            margin-right: 12px;
-            width: 30px;
-            text-align: center;
-        }
+      .sidebar-icon {
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        margin: 5px 10px;
+        border-radius: 10px;
+        font-size: 16px;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
 
-        .sidebar-icon:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .sidebar-icon.active {
-            background-color: white;
-            color: var(--primary-blue);
-        }
-
-        .sidebar-divider {
-            height: 1px;
-            background-color: rgba(255, 255, 255, 0.3);
-            margin: 10px 20px;
-        }
-
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        /* Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            margin-bottom: 20px;
-        }
-
-        .wallet-section {
+      .nav-item {
             display: flex;
             align-items: center;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+        }
+        
+        .nav-item:hover, .nav-item.active {
+            background-color: rgba(247, 195, 95, 0.1);
+            border-left: 3px solid var(--primary);
         }
 
-        .wallet-address {
-            padding: 8px 15px;
-            background-color: var(--bg-color);
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            margin-right: 15px;
-            color: var(--text-light);
-        }
+      .sidebar-icon .icon {
+        font-size: 24px;
+        margin-right: 12px;
+        width: 30px;
+        text-align: center;
+      }
 
-        .settings-button {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            cursor: pointer;
-            background-color: var(--bg-color);
-        }
+      .sidebar-icon:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
 
-        .price-indicators {
-            display: flex;
-            gap: 15px;
-        }
+      .sidebar-icon.active {
+        background-color: white;
+        color: var(--primary-blue);
+      }
 
-        .price-tag {
-            padding: 8px 15px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            background-color: var(--bg-color);
-        }
+      .sidebar-divider {
+        height: 1px;
+        background-color: rgba(255, 255, 255, 0.3);
+        margin: 10px 20px;
+      }
 
-        .language-selector {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            background-color: var(--bg-color);
-            margin-left: 15px;
-        }
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+      }
 
-        /* Gold Summary */
-        .gold-summary {
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            padding: 20px;
-            margin-bottom: 20px;
-        }
+      /* Header */
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
+      }
 
-        .gold-possession {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
+      .wallet-section {
+        display: flex;
+        align-items: center;
+      }
 
-        .gold-total {
-            font-size: 42px;
-            font-weight: bold;
-            color: var(--text-dark);
-        }
+      .wallet-address {
+        padding: 8px 15px;
+        background-color: var(--bg-color);
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        margin-right: 15px;
+        color: var(--text-light);
+      }
 
-        .gold-unit {
-            font-size: 18px;
-            color: var(--text-light);
-            margin-left: 10px;
-        }
+      .settings-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        cursor: pointer;
+        background-color: var(--bg-color);
+      }
 
-        .gold-value {
-            font-size: 20px;
-            color: var(--text-light);
-        }
+      .price-indicators {
+        display: flex;
+        gap: 15px;
+      }
 
-        .action-buttons {
-            display: flex;
-            gap: 15px;
-        }
+      .price-tag {
+        padding: 8px 15px;
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        background-color: var(--bg-color);
+      }
 
-        .action-button {
-            flex: 1;
-            padding: 15px;
-            border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
+      .language-selector {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        background-color: var(--bg-color);
+        margin-left: 15px;
+      }
 
-        .buy-button {
-            background-color: var(--action-color);
-            color: white;
-        }
+      /* Gold Summary */
+      .gold-summary {
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        padding: 20px;
+        margin-bottom: 20px;
+      }
 
-        .sell-button {
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-        }
+      .gold-possession {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
 
-        .history-button {
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-        }
+      .gold-total {
+        font-size: 42px;
+        font-weight: bold;
+        color: var(--text-dark);
+      }
 
-        .action-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
+      .gold-unit {
+        font-size: 18px;
+        color: var(--text-light);
+        margin-left: 10px;
+      }
 
-        /* NFT List */
-        .nft-container-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
+      .gold-value {
+        font-size: 20px;
+        color: var(--text-light);
+      }
 
-        .nft-container-title h2 {
-            font-size: 22px;
-            font-weight: 600;
-        }
+      .action-buttons {
+        display: flex;
+        gap: 15px;
+      }
 
-        .nft-filter {
-            display: flex;
-            gap: 10px;
-        }
+      .action-button {
+        flex: 1;
+        padding: 15px;
+        border-radius: 12px;
+        font-size: 16px;
+        font-weight: 600;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
 
-        .filter-option {
-            padding: 8px 15px;
-            border-radius: 20px;
-            background-color: var(--bg-color);
-            font-size: 14px;
-            cursor: pointer;
-        }
+      .buy-button {
+        background-color: var(--action-color);
+        color: white;
+      }
 
-        .filter-option.active {
-            background-color: var(--primary-blue);
-            color: white;
-        }
+      .sell-button {
+        background-color: var(--bg-color);
+        color: var(--text-dark);
+      }
 
-        .nft-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
+      .history-button {
+        background-color: var(--bg-color);
+        color: var(--text-dark);
+      }
 
-        .nft-card {
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            padding: 20px;
-            transition: transform 0.3s;
-        }
+      .action-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
 
-        .nft-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-        }
+      /* NFT List */
+      .nft-container-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 15px;
+      }
 
-        .nft-card-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        }
+      .nft-container-title h2 {
+        font-size: 22px;
+        font-weight: 600;
+      }
 
-        .nft-id {
-            font-size: 14px;
-            color: var(--text-light);
-            background-color: var(--bg-color);
-            padding: 5px 10px;
-            border-radius: 15px;
-        }
+      .nft-filter {
+        display: flex;
+        gap: 10px;
+      }
 
-        .nft-date {
-            font-size: 14px;
-            color: var(--text-light);
-        }
+      .filter-option {
+        padding: 8px 15px;
+        border-radius: 20px;
+        background-color: var(--bg-color);
+        font-size: 14px;
+        cursor: pointer;
+      }
 
-        .nft-details {
-            margin-bottom: 15px;
-        }
+      .filter-option.active {
+        background-color: var(--primary-blue);
+        color: white;
+      }
 
-        .nft-ingot {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
+      .nft-list {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+      }
 
-        .nft-grams {
-            font-size: 24px;
-            font-weight: bold;
-            color: var(--dark-blue);
-        }
+      .nft-card {
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        padding: 20px;
+        transition: transform 0.3s;
+      }
 
-        .nft-unit {
-            font-size: 16px;
-            color: var(--text-light);
-        }
+      .nft-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+      }
 
-        .nft-actions {
-            display: flex;
-            gap: 10px;
-        }
+      .nft-card-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+      }
 
-        .nft-action {
-            flex: 1;
-            padding: 10px;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-        }
+      .nft-id {
+        font-size: 14px;
+        color: var(--text-light);
+        background-color: var(--bg-color);
+        padding: 5px 10px;
+        border-radius: 15px;
+      }
 
-        .nft-sell {
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-        }
+      .nft-date {
+        font-size: 14px;
+        color: var(--text-light);
+      }
 
-        .nft-info {
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-        }
+      .nft-details {
+        margin-bottom: 15px;
+      }
 
-        /* Notifications */
-        .notifications {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 300px;
-        }
+      .nft-ingot {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
 
-        .notification {
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            padding: 15px;
-            margin-bottom: 10px;
-            display: flex;
-            gap: 15px;
-            align-items: flex-start;
-            transform: translateX(400px);
-            animation: slideIn 0.5s forwards;
-        }
+      .nft-grams {
+        font-size: 24px;
+        font-weight: bold;
+        color: var(--dark-blue);
+      }
 
-        @keyframes slideIn {
-            to {
-                transform: translateX(0);
-            }
-        }
+      .nft-unit {
+        font-size: 16px;
+        color: var(--text-light);
+      }
 
-        .notification-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--primary-blue);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-        }
+      .nft-actions {
+        display: flex;
+        gap: 10px;
+      }
 
-        .notification-content {
-            flex: 1;
-        }
+      .nft-action {
+        flex: 1;
+        padding: 10px;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 500;
+        cursor: pointer;
+      }
 
-        .notification-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
+      .nft-sell {
+        background-color: var(--bg-color);
+        color: var(--text-dark);
+      }
 
-        .notification-message {
-            font-size: 14px;
-            color: var(--text-light);
-        }
+      .nft-info {
+        background-color: var(--bg-color);
+        color: var(--text-dark);
+      }
 
-        .notification-close {
-            align-self: flex-start;
-            cursor: pointer;
-            font-size: 18px;
-            color: var(--text-light);
+      /* Notifications */
+      .notifications {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 300px;
+      }
+
+      .notification {
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        margin-bottom: 10px;
+        display: flex;
+        gap: 15px;
+        align-items: flex-start;
+        transform: translateX(400px);
+        animation: slideIn 0.5s forwards;
+      }
+
+      @keyframes slideIn {
+        to {
+          transform: translateX(0);
         }
+      }
+
+      .notification-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: var(--primary-blue);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+      }
+
+      .notification-content {
+        flex: 1;
+      }
+
+      .notification-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
+
+      .notification-message {
+        font-size: 14px;
+        color: var(--text-light);
+      }
+
+      .notification-close {
+        align-self: flex-start;
+        cursor: pointer;
+        font-size: 18px;
+        color: var(--text-light);
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="sidebar-icon">
-                <div class="icon">🔄</div>
-                <span>Staking</span>
-            </div>
-            <a href="index.html" class="nav-item active">
-                <div class="sidebar-icon">
-                    <div class="icon">🏠</div>
-                    <span>Dashboard</span>
-                </div>
-            </a>
-            <a href="buy-updated.html" class="nav-item active">
-            <div class="sidebar-icon active">
-                <div class="icon">🪙</div>
-                <span>Buy Gold</span>
-            </div>
-            </a>
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="sidebar-icon">
+          <div class="icon">🔄</div>
+          <span>Staking</span>
+        </div>
+        <a href="index.html" >
+          <div class="sidebar-icon active">
+            <div class="icon">🏠</div>
+            <span>Dashboard</span>
+          </div>
+        </a>
+        <a href="buy-updated.html" >
+          <div class="sidebar-icon ">
+            <div class="icon">🪙</div>
+            <span>Buy Gold</span>
+          </div>
+        </a>
 
-            <a href="gold-sell.html" class="nav-item active">
-            <div class="sidebar-icon">
-                <div class="icon">💸</div>
-                <span>Sell Gold</span>
+        <a href="gold-sell.html">
+          <div class="sidebar-icon">
+            <div class="icon">💸</div>
+            <span>Sell Gold</span>
+          </div>
+        </a>
+        <div class="sidebar-divider"></div>
+
+        <div class="sidebar-icon">
+          <div class="icon">📁</div>
+          <span>Gold Ingots</span>
+        </div>
+        <div class="sidebar-icon">
+          <div class="icon">📈</div>
+          <span>Market</span>
+        </div>
+        <div class="sidebar-icon">
+          <div class="icon">💬</div>
+          <span>Support</span>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-icon">
+          <div class="icon">🚪</div>
+          <span>Logout</span>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Header -->
+        <div class="header">
+          <div class="wallet-section">
+            <div class="wallet-address">
+              <span>0xBF7eaDD0x65...</span>
             </div>
-            </a>
-            <div class="sidebar-divider"></div>
-       
-            <div class="sidebar-icon">
-                <div class="icon">📁</div>
-                <span>Gold Ingots</span>
+            <div class="settings-button">
+              <span>⚙️</span>
             </div>
-            <div class="sidebar-icon">
-                <div class="icon">📈</div>
-                <span>Market</span>
+          </div>
+          <div class="price-indicators">
+            <div class="price-tag">
+              <span>USDT: 1.301</span>
             </div>
-            <div class="sidebar-icon">
-                <div class="icon">💬</div>
-                <span>Support</span>
+            <div class="price-tag">
+              <span>MITT: 1.301</span>
             </div>
-            <div class="sidebar-divider"></div>
-            <div class="sidebar-icon">
-                <div class="icon">🚪</div>
-                <span>Logout</span>
+            <div class="price-tag">
+              <span>BNB: 0.33286</span>
             </div>
+            <div class="price-tag">
+              <span>Gold Price: $68.25/g</span>
+            </div>
+            <div class="language-selector">
+              <span>🇺🇸</span>
+            </div>
+          </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Header -->
-            <div class="header">
-                <div class="wallet-section">
-                    <div class="wallet-address">
-                        <span>0xBF7eaDD0x65...</span>
-                    </div>
-                    <div class="settings-button">
-                        <span>⚙️</span>
-                    </div>
-                </div>
-                <div class="price-indicators">
-                    <div class="price-tag">
-                        <span>USDT: 1.301</span>
-                    </div>
-                    <div class="price-tag">
-                        <span>MITT: 1.301</span>
-                    </div>
-                    <div class="price-tag">
-                        <span>BNB: 0.33286</span>
-                    </div>
-                    <div class="price-tag">
-                        <span>Gold Price: $68.25/g</span>
-                    </div>
-                    <div class="language-selector">
-                        <span>🇺🇸</span>
-                    </div>
-                </div>
+        <!-- Gold Summary -->
+        <div class="gold-summary">
+          <div class="gold-possession">
+            <div>
+              <span class="gold-total">235.75</span>
+              <span class="gold-unit">grams</span>
+              <div class="gold-value">≈ $16,089.91 USD</div>
             </div>
-
-            <!-- Gold Summary -->
-            <div class="gold-summary">
-                <div class="gold-possession">
-                    <div>
-                        <span class="gold-total">235.75</span>
-                        <span class="gold-unit">grams</span>
-                        <div class="gold-value">≈ $16,089.91 USD</div>
-                    </div>
-                </div>
-                <div class="action-buttons">
-                    <div class="action-button buy-button">
-                        <span>🪙 Buy Gold</span>
-                    </div>
-                    <div class="action-button sell-button">
-                        <span>💸 Sell Gold</span>
-                    </div>
-                    <div class="action-button history-button">
-                        <span>📋 Transaction History</span>
-                    </div>
-                </div>
+          </div>
+          <div class="action-buttons">
+            <div class="action-button buy-button">
+              <span>🪙 Buy Gold</span>
             </div>
-
-            <!-- NFT List -->
-            <div class="nft-container">
-                <div class="nft-container-title">
-                    <h2>Your Gold NFTs</h2>
-                    <div class="nft-filter">
-                        <div class="filter-option active">All</div>
-                        <div class="filter-option">Recent</div>
-                        <div class="filter-option">Largest</div>
-                    </div>
-                </div>
-                <div class="nft-list">
-                    <!-- NFT Card 1 -->
-                    <div class="nft-card">
-                        <div class="nft-image">
-                            <img src="/api/placeholder/400/240" alt="Gold Bar NFT Image">
-                        </div>
-                        <div class="nft-card-header">
-                            <div class="nft-id">NFT #58392</div>
-                            <div class="nft-date">Purchased: Mar 1, 2025</div>
-                        </div>
-                        <div class="nft-details">
-                            <div class="nft-ingot">Ingot: Swiss Gold Bar #A12493</div>
-                            <div>
-                                <span class="nft-grams">50.00</span>
-                                <span class="nft-unit">grams</span>
-                            </div>
-                        </div>
-                        <div class="nft-actions">
-                            <div class="nft-action nft-sell">Sell</div>
-                            <div class="nft-action nft-info">View Details</div>
-                        </div>
-                    </div>
-
-                    <!-- NFT Card 2 -->
-                    <div class="nft-card">
-                        <div class="nft-image">
-                            <img src="/api/placeholder/400/240" alt="Gold Bar NFT Image">
-                        </div>
-                        <div class="nft-card-header">
-                            <div class="nft-id">NFT #60128</div>
-                            <div class="nft-date">Purchased: Feb 14, 2025</div>
-                        </div>
-                        <div class="nft-details">
-                            <div class="nft-ingot">Ingot: London Gold Bar #B78512</div>
-                            <div>
-                                <span class="nft-grams">100.00</span>
-                                <span class="nft-unit">grams</span>
-                            </div>
-                        </div>
-                        <div class="nft-actions">
-                            <div class="nft-action nft-sell">Sell</div>
-                            <div class="nft-action nft-info">View Details</div>
-                        </div>
-                    </div>
-
-                    <!-- NFT Card 3 -->
-                    <div class="nft-card">
-                        <div class="nft-image">
-                            <img src="/api/placeholder/400/240" alt="Gold Bar NFT Image">
-                        </div>
-                        <div class="nft-card-header">
-                            <div class="nft-id">NFT #62571</div>
-                            <div class="nft-date">Purchased: Feb 28, 2025</div>
-                        </div>
-                        <div class="nft-details">
-                            <div class="nft-ingot">Ingot: Dubai Gold Bar #X39156</div>
-                            <div>
-                                <span class="nft-grams">85.75</span>
-                                <span class="nft-unit">grams</span>
-                            </div>
-                        </div>
-                        <div class="nft-actions">
-                            <div class="nft-action nft-sell">Sell</div>
-                            <div class="nft-action nft-info">View Details</div>
-                        </div>
-                    </div>
-                </div>
+            <div class="action-button sell-button">
+              <span>💸 Sell Gold</span>
             </div>
+            <div class="action-button history-button">
+              <span>📋 Transaction History</span>
+            </div>
+          </div>
         </div>
+
+        <!-- NFT List -->
+        <div class="nft-container">
+          <div class="nft-container-title">
+            <h2>Your Gold NFTs</h2>
+            <div class="nft-filter">
+              <div class="filter-option active">All</div>
+              <div class="filter-option">Recent</div>
+              <div class="filter-option">Largest</div>
+            </div>
+          </div>
+          <div class="nft-list">
+            <!-- NFT Card 1 -->
+            <div class="nft-card">
+              <div class="nft-image">
+                <img src="/api/placeholder/400/240" alt="Gold Bar NFT Image" />
+              </div>
+              <div class="nft-card-header">
+                <div class="nft-id">NFT #58392</div>
+                <div class="nft-date">Purchased: Mar 1, 2025</div>
+              </div>
+              <div class="nft-details">
+                <div class="nft-ingot">Ingot: Swiss Gold Bar #A12493</div>
+                <div>
+                  <span class="nft-grams">50.00</span>
+                  <span class="nft-unit">grams</span>
+                </div>
+              </div>
+              <div class="nft-actions">
+                <div class="nft-action nft-sell">Sell</div>
+                <div class="nft-action nft-info">View Details</div>
+              </div>
+            </div>
+
+            <!-- NFT Card 2 -->
+            <div class="nft-card">
+              <div class="nft-image">
+                <img src="/api/placeholder/400/240" alt="Gold Bar NFT Image" />
+              </div>
+              <div class="nft-card-header">
+                <div class="nft-id">NFT #60128</div>
+                <div class="nft-date">Purchased: Feb 14, 2025</div>
+              </div>
+              <div class="nft-details">
+                <div class="nft-ingot">Ingot: London Gold Bar #B78512</div>
+                <div>
+                  <span class="nft-grams">100.00</span>
+                  <span class="nft-unit">grams</span>
+                </div>
+              </div>
+              <div class="nft-actions">
+                <div class="nft-action nft-sell">Sell</div>
+                <div class="nft-action nft-info">View Details</div>
+              </div>
+            </div>
+
+            <!-- NFT Card 3 -->
+            <div class="nft-card">
+              <div class="nft-image">
+                <img src="/api/placeholder/400/240" alt="Gold Bar NFT Image" />
+              </div>
+              <div class="nft-card-header">
+                <div class="nft-id">NFT #62571</div>
+                <div class="nft-date">Purchased: Feb 28, 2025</div>
+              </div>
+              <div class="nft-details">
+                <div class="nft-ingot">Ingot: Dubai Gold Bar #X39156</div>
+                <div>
+                  <span class="nft-grams">85.75</span>
+                  <span class="nft-unit">grams</span>
+                </div>
+              </div>
+              <div class="nft-actions">
+                <div class="nft-action nft-sell">Sell</div>
+                <div class="nft-action nft-info">View Details</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Notifications -->
     <div class="notifications">
-        <div class="notification">
-            <div class="notification-icon">
-                <span>✅</span>
-            </div>
-            <div class="notification-content">
-                <div class="notification-title">Sale Approved</div>
-                <div class="notification-message">Your sale order #4521 has been approved. You will receive 24.5 USDT shortly.</div>
-            </div>
-            <div class="notification-close">×</div>
+      <div class="notification">
+        <div class="notification-icon">
+          <span>✅</span>
         </div>
+        <div class="notification-content">
+          <div class="notification-title">Sale Approved</div>
+          <div class="notification-message">
+            Your sale order #4521 has been approved. You will receive 24.5 USDT
+            shortly.
+          </div>
+        </div>
+        <div class="notification-close">×</div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

@@ -1,730 +1,819 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Remitt Gold - Buy Gold</title>
     <style>
-        :root {
-            --primary-blue: #3e8ede;
-            --dark-blue: #2166b9;
-            --light-blue: #87c4ff;
-            --bg-color: #f5f7fa;
-            --card-bg: #ffffff;
-            --text-dark: #333333;
-            --text-light: #777777;
-            --border-color: #e0e0e0;
-            --action-color: #00d8d8;
-            --danger-color: #ff6b6b;
-            --success-color: #4cd964;
-        }
+      :root {
+        --primary-blue: #3e8ede;
+        --dark-blue: #2166b9;
+        --light-blue: #87c4ff;
+        --bg-color: #f5f7fa;
+        --card-bg: #ffffff;
+        --text-dark: #333333;
+        --text-light: #777777;
+        --border-color: #e0e0e0;
+        --action-color: #00d8d8;
+        --danger-color: #ff6b6b;
+        --success-color: #4cd964;
+      }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      a {
+        text-decoration: none;
+      }
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-dark);
+        padding: 0;
+        margin: 0;
+      }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            padding: 0;
-            margin: 0;
-        }
+      .container {
+        display: flex;
+        min-height: 100vh;
+      }
 
-        .container {
-            display: flex;
-            min-height: 100vh;
-        }
+      /* Sidebar */
+      .sidebar {
+        width: 220px;
+        background-color: var(--primary-blue);
+        display: flex;
+        flex-direction: column;
+        padding: 20px 0;
+      }
 
-        /* Sidebar */
-        .sidebar {
-            width: 220px;
-            background-color: var(--primary-blue);
-            display: flex;
-            flex-direction: column;
-            padding: 20px 0;
-        }
+      .sidebar-icon {
+        display: flex;
+        align-items: center;
+        padding: 12px 20px;
+        margin: 5px 10px;
+        border-radius: 10px;
+        font-size: 16px;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
 
-        .sidebar-icon {
-            display: flex;
-            align-items: center;
-            padding: 12px 20px;
-            margin: 5px 10px;
-            border-radius: 10px;
-            font-size: 16px;
-            color: white;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+      .sidebar-icon .icon {
+        font-size: 24px;
+        margin-right: 12px;
+        width: 30px;
+        text-align: center;
+      }
 
-        .sidebar-icon .icon {
-            font-size: 24px;
-            margin-right: 12px;
-            width: 30px;
-            text-align: center;
-        }
+      .sidebar-icon:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
 
-        .sidebar-icon:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
+      .sidebar-icon.active {
+        background-color: white;
+        color: var(--primary-blue);
+      }
 
-        .sidebar-icon.active {
-            background-color: white;
-            color: var(--primary-blue);
-        }
+      .sidebar-divider {
+        height: 1px;
+        background-color: rgba(255, 255, 255, 0.3);
+        margin: 10px 20px;
+      }
 
-        .sidebar-divider {
-            height: 1px;
-            background-color: rgba(255, 255, 255, 0.3);
-            margin: 10px 20px;
-        }
+      /* Main Content */
+      .main-content {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+      }
 
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-        }
+      /* Header */
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        margin-bottom: 20px;
+      }
 
-        /* Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 20px;
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            margin-bottom: 20px;
-        }
+      .wallet-section {
+        display: flex;
+        align-items: center;
+      }
 
-        .wallet-section {
-            display: flex;
-            align-items: center;
-        }
+      .wallet-address {
+        padding: 8px 15px;
+        background-color: var(--bg-color);
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        margin-right: 15px;
+        color: var(--text-light);
+      }
 
-        .wallet-address {
-            padding: 8px 15px;
-            background-color: var(--bg-color);
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            margin-right: 15px;
-            color: var(--text-light);
-        }
+      .settings-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        cursor: pointer;
+        background-color: var(--bg-color);
+      }
 
-        .settings-button {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 20px;
-            cursor: pointer;
-            background-color: var(--bg-color);
-        }
+      .price-indicators {
+        display: flex;
+        gap: 15px;
+      }
 
-        .price-indicators {
-            display: flex;
-            gap: 15px;
-        }
+      .price-tag {
+        padding: 8px 15px;
+        border-radius: 30px;
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        background-color: var(--bg-color);
+      }
 
-        .price-tag {
-            padding: 8px 15px;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            background-color: var(--bg-color);
-        }
+      .language-selector {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        background-color: var(--bg-color);
+        margin-left: 15px;
+      }
 
-        .language-selector {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            background-color: var(--bg-color);
-            margin-left: 15px;
-        }
+      /* Buy Gold Section */
+      .page-title {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+      }
 
-        /* Buy Gold Section */
-        .page-title {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-        }
+      .back-button {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background-color: var(--bg-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 18px;
+        margin-right: 15px;
+        cursor: pointer;
+      }
 
-        .back-button {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            background-color: var(--bg-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 18px;
-            margin-right: 15px;
-            cursor: pointer;
-        }
+      .page-title h1 {
+        font-size: 28px;
+        font-weight: 600;
+      }
 
-        .page-title h1 {
-            font-size: 28px;
-            font-weight: 600;
-        }
+      .buy-gold-container {
+        display: flex;
+        gap: 30px;
+      }
 
-        .buy-gold-container {
-            display: flex;
-            gap: 30px;
-        }
+      .buy-form {
+        flex: 2;
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        padding: 25px;
+      }
 
-        .buy-form {
-            flex: 2;
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            padding: 25px;
-        }
+      .form-section {
+        margin-bottom: 25px;
+      }
 
-        .form-section {
-            margin-bottom: 25px;
-        }
+      .form-section-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 15px;
+        color: var(--text-light);
+      }
 
-        .form-section-title {
-            font-size: 16px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--text-light);
-        }
+      .ingot-selector {
+        display: flex;
+        gap: 20px;
+        overflow-x: auto;
+        padding-bottom: 15px;
+      }
 
-        .ingot-selector {
-            display: flex;
-            gap: 20px;
-            overflow-x: auto;
-            padding-bottom: 15px;
-        }
+      .ingot-option {
+        min-width: 220px;
+        background-color: var(--bg-color);
+        border-radius: 15px;
+        padding: 0 0 15px 0;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: 2px solid transparent;
+      }
 
-        .ingot-option {
-            min-width: 220px;
-            background-color: var(--bg-color);
-            border-radius: 15px;
-            padding: 0 0 15px 0;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
+      .ingot-image {
+        width: 100%;
+        height: 120px;
+        border-radius: 13px 13px 0 0;
+        overflow: hidden;
+        margin-bottom: 15px;
+      }
 
-        .ingot-image {
-            width: 100%;
-            height: 120px;
-            border-radius: 13px 13px 0 0;
-            overflow: hidden;
-            margin-bottom: 15px;
-        }
+      .ingot-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
 
-        .ingot-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+      .ingot-option.selected {
+        background-color: rgba(62, 142, 222, 0.1);
+        border: 2px solid var(--primary-blue);
+      }
 
-        .ingot-option.selected {
-            background-color: rgba(62, 142, 222, 0.1);
-            border: 2px solid var(--primary-blue);
-        }
+      .ingot-option:hover {
+        transform: translateY(-5px);
+      }
 
-        .ingot-option:hover {
-            transform: translateY(-5px);
-        }
+      .ingot-info {
+        padding: 0 15px;
+      }
 
-        .ingot-info {
-            padding: 0 15px;
-        }
+      .ingot-id {
+        font-size: 14px;
+        color: var(--text-light);
+        margin-bottom: 8px;
+      }
 
-        .ingot-id {
-            font-size: 14px;
-            color: var(--text-light);
-            margin-bottom: 8px;
-        }
+      .ingot-name {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 5px;
+      }
 
-        .ingot-name {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 5px;
-        }
+      .ingot-available {
+        font-size: 14px;
+        color: var(--text-light);
+      }
 
-        .ingot-available {
-            font-size: 14px;
-            color: var(--text-light);
-        }
+      .amount-section {
+        background-color: var(--bg-color);
+        border-radius: 15px;
+        padding: 20px;
+      }
 
-        .amount-section {
-            background-color: var(--bg-color);
-            border-radius: 15px;
-            padding: 20px;
-        }
+      .amount-input {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
 
-        .amount-input {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
+      .amount-label {
+        font-size: 18px;
+        font-weight: 600;
+      }
 
-        .amount-label {
-            font-size: 18px;
-            font-weight: 600;
-        }
+      .amount-field {
+        flex: 1;
+        margin: 0 20px;
+        position: relative;
+      }
 
-        .amount-field {
-            flex: 1;
-            margin: 0 20px;
-            position: relative;
-        }
+      .amount-field input {
+        width: 100%;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 10px;
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+        background-color: var(--card-bg);
+      }
 
-        .amount-field input {
-            width: 100%;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            font-weight: 600;
-            text-align: center;
-            background-color: var(--card-bg);
-        }
+      .amount-field input:focus {
+        outline: 2px solid var(--primary-blue);
+      }
 
-        .amount-field input:focus {
-            outline: 2px solid var(--primary-blue);
-        }
+      .grams-label {
+        font-size: 18px;
+        font-weight: 600;
+      }
 
-        .grams-label {
-            font-size: 18px;
-            font-weight: 600;
-        }
+      .amount-slider {
+        width: 100%;
+        -webkit-appearance: none;
+        height: 6px;
+        border-radius: 3px;
+        background: var(--border-color);
+        outline: none;
+        margin-bottom: 10px;
+      }
 
-        .amount-slider {
-            width: 100%;
-            -webkit-appearance: none;
-            height: 6px;
-            border-radius: 3px;
-            background: var(--border-color);
-            outline: none;
-            margin-bottom: 10px;
-        }
+      .amount-slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: var(--primary-blue);
+        cursor: pointer;
+      }
 
-        .amount-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary-blue);
-            cursor: pointer;
-        }
+      .slider-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        color: var(--text-light);
+      }
 
-        .slider-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 14px;
-            color: var(--text-light);
-        }
+      .payment-summary {
+        flex: 1;
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        padding: 25px;
+        height: fit-content;
+        position: sticky;
+        top: 20px;
+      }
 
-        .payment-summary {
-            flex: 1;
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            padding: 25px;
-            height: fit-content;
-            position: sticky;
-            top: 20px;
-        }
+      .summary-title {
+        font-size: 22px;
+        font-weight: 600;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--border-color);
+      }
 
-        .summary-title {
-            font-size: 22px;
-            font-weight: 600;
-            margin-bottom: 30px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid var(--border-color);
-        }
+      .summary-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        font-size: 16px;
+      }
 
-        .summary-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            font-size: 16px;
-        }
+      .summary-label {
+        color: var(--text-light);
+      }
 
-        .summary-label {
-            color: var(--text-light);
-        }
+      .summary-value {
+        font-weight: 600;
+      }
 
-        .summary-value {
-            font-weight: 600;
-        }
+      .summary-total {
+        display: flex;
+        justify-content: space-between;
+        margin: 25px 0;
+        padding-top: 15px;
+        border-top: 1px solid var(--border-color);
+        font-size: 20px;
+        font-weight: 600;
+      }
 
-        .summary-total {
-            display: flex;
-            justify-content: space-between;
-            margin: 25px 0;
-            padding-top: 15px;
-            border-top: 1px solid var(--border-color);
-            font-size: 20px;
-            font-weight: 600;
-        }
+      .summary-note {
+        font-size: 14px;
+        color: var(--text-light);
+        margin-bottom: 25px;
+      }
 
-        .summary-note {
-            font-size: 14px;
-            color: var(--text-light);
-            margin-bottom: 25px;
-        }
+      .checkout-button {
+        width: 100%;
+        padding: 15px;
+        border-radius: 12px;
+        background-color: var(--action-color);
+        color: white;
+        font-size: 18px;
+        font-weight: 600;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
 
-        .checkout-button {
-            width: 100%;
-            padding: 15px;
-            border-radius: 12px;
-            background-color: var(--action-color);
-            color: white;
-            font-size: 18px;
-            font-weight: 600;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
+      .checkout-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
 
-        .checkout-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
+      /* Modal */
+      .modal-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
 
-        /* Modal */
-        .modal-backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
+      .modal-container {
+        background-color: var(--card-bg);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        padding: 30px;
+        width: 90%;
+        max-width: 500px;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
 
-        .modal-container {
-            background-color: var(--card-bg);
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding: 30px;
-            width: 90%;
-            max-width: 500px;
-            max-height: 90vh;
-            overflow-y: auto;
-        }
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
 
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
+      .modal-title {
+        font-size: 24px;
+        font-weight: 600;
+      }
 
-        .modal-title {
-            font-size: 24px;
-            font-weight: 600;
-        }
+      .modal-close {
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--text-light);
+      }
 
-        .modal-close {
-            font-size: 24px;
-            cursor: pointer;
-            color: var(--text-light);
-        }
+      .modal-content {
+        margin-bottom: 30px;
+      }
 
-        .modal-content {
-            margin-bottom: 30px;
-        }
+      .modal-actions {
+        display: flex;
+        gap: 15px;
+      }
 
-        .modal-actions {
-            display: flex;
-            gap: 15px;
-        }
+      .modal-button {
+        flex: 1;
+        padding: 12px;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: 600;
+        text-align: center;
+        cursor: pointer;
+      }
 
-        .modal-button {
-            flex: 1;
-            padding: 12px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            text-align: center;
-            cursor: pointer;
-        }
+      .confirm-button {
+        background-color: var(--action-color);
+        color: white;
+      }
 
-        .confirm-button {
-            background-color: var(--action-color);
-            color: white;
-        }
-
-        .cancel-button {
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-        }
+      .cancel-button {
+        background-color: var(--bg-color);
+        color: var(--text-dark);
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <div class="container">
-        <!-- Sidebar -->
-        <div class="sidebar">
-            <div class="sidebar-icon">
-                <div class="icon">🔄</div>
-                <span>Staking</span>
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <div class="sidebar-icon">
+          <div class="icon">🔄</div>
+          <span>Staking</span>
+        </div>
+        <a href="index.html" >
+          <div class="sidebar-icon">
+            <div class="icon">🏠</div>
+            <span>Dashboard</span>
+          </div>
+        </a>
+        <a href="buy-gold-amount.html" >
+          <div class="sidebar-icon active">
+            <div class="icon">🪙</div>
+            <span>Buy Gold</span>
+          </div>
+        </a>
+        <div class="sidebar-icon">
+          <div class="icon">💸</div>
+          <span>Sell Gold</span>
+        </div>
+        <div class="sidebar-divider"></div>
+
+        <div class="sidebar-icon">
+          <div class="icon">📁</div>
+          <span>Gold Ingots</span>
+        </div>
+        <div class="sidebar-icon">
+          <div class="icon">📈</div>
+          <span>Market</span>
+        </div>
+        <div class="sidebar-icon">
+          <div class="icon">💬</div>
+          <span>Support</span>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-icon">
+          <div class="icon">🚪</div>
+          <span>Logout</span>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <!-- Header -->
+        <div class="header">
+          <div class="wallet-section">
+            <div class="wallet-address">
+              <span>0xBF7eaDD0x65...</span>
             </div>
-            <a href="index.html" class="nav-item active">
-                <div class="sidebar-icon">
-                    <div class="icon">🏠</div>
-                    <span>Dashboard</span>
-                </div>
-            </a>
-            <a href="buy-gold-amount.html" class="nav-item active">
-            <div class="sidebar-icon active">
-                <div class="icon">🪙</div>
-                <span>Buy Gold</span>
+            <div class="settings-button">
+              <span>⚙️</span>
             </div>
-            </a>
-            <div class="sidebar-icon">
-                <div class="icon">💸</div>
-                <span>Sell Gold</span>
+          </div>
+          <div class="price-indicators">
+            <div class="price-tag">
+              <span>USDT: 1.301</span>
             </div>
-            <div class="sidebar-divider"></div>
-      
-            <div class="sidebar-icon">
-                <div class="icon">📁</div>
-                <span>Gold Ingots</span>
+            <div class="price-tag">
+              <span>MITT: 1.301</span>
             </div>
-            <div class="sidebar-icon">
-                <div class="icon">📈</div>
-                <span>Market</span>
+            <div class="price-tag">
+              <span>BNB: 0.33286</span>
             </div>
-            <div class="sidebar-icon">
-                <div class="icon">💬</div>
-                <span>Support</span>
+            <div class="price-tag">
+              <span>Gold Price: $68.25/g</span>
             </div>
-            <div class="sidebar-divider"></div>
-            <div class="sidebar-icon">
-                <div class="icon">🚪</div>
-                <span>Logout</span>
+            <div class="language-selector">
+              <span>🇺🇸</span>
             </div>
+          </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-content">
-            <!-- Header -->
-            <div class="header">
-                <div class="wallet-section">
-                    <div class="wallet-address">
-                        <span>0xBF7eaDD0x65...</span>
-                    </div>
-                    <div class="settings-button">
-                        <span>⚙️</span>
-                    </div>
-                </div>
-                <div class="price-indicators">
-                    <div class="price-tag">
-                        <span>USDT: 1.301</span>
-                    </div>
-                    <div class="price-tag">
-                        <span>MITT: 1.301</span>
-                    </div>
-                    <div class="price-tag">
-                        <span>BNB: 0.33286</span>
-                    </div>
-                    <div class="price-tag">
-                        <span>Gold Price: $68.25/g</span>
-                    </div>
-                    <div class="language-selector">
-                        <span>🇺🇸</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Page Title -->
-            <div class="page-title">
-                <div class="back-button">
-                    <span>←</span>
-                </div>
-                <h1>Buy Gold</h1>
-            </div>
-
-            <div class="buy-gold-container">
-                <!-- Buy Form -->
-                <div class="buy-form">
-                    <div class="form-section">
-                        <div class="form-section-title">Select Gold Ingot</div>
-                        <div class="ingot-selector">
-                            <!-- Ingot 1 -->
-                            <div class="ingot-option selected">
-                                <div class="ingot-image">
-                                    <img src="/api/placeholder/400/240" alt="Gold Ingot">
-                                </div>
-                                <div class="ingot-info">
-                                    <div class="ingot-id">ID: #A12493</div>
-                                    <div class="ingot-name">Swiss Gold Bar</div>
-                                    <div class="ingot-available">Available: 850.2g</div>
-                                </div>
-                            </div>
-
-                            <!-- Ingot 2 -->
-                            <div class="ingot-option">
-                                <div class="ingot-image">
-                                    <img src="/api/placeholder/400/240" alt="Gold Ingot">
-                                </div>
-                                <div class="ingot-info">
-                                    <div class="ingot-id">ID: #B78512</div>
-                                    <div class="ingot-name">London Gold Bar</div>
-                                    <div class="ingot-available">Available: 1250.7g</div>
-                                </div>
-                            </div>
-
-                            <!-- Ingot 3 -->
-                            <div class="ingot-option">
-                                <div class="ingot-image">
-                                    <img src="/api/placeholder/400/240" alt="Gold Ingot">
-                                </div>
-                                <div class="ingot-info">
-                                    <div class="ingot-id">ID: #X39156</div>
-                                    <div class="ingot-name">Dubai Gold Bar</div>
-                                    <div class="ingot-available">Available: 500.0g</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-section">
-                        <div class="form-section-title">Purchase Amount</div>
-                        <div class="amount-section">
-                            <!-- Toggle between Dollar or Gold amount -->
-                            <div class="toggle-container" style="display: flex; justify-content: center; margin-bottom: 20px;">
-                                <div class="toggle-options" style="display: flex; background-color: var(--card-bg); border-radius: 10px; overflow: hidden; border: 1px solid var(--border-color);">
-                                    <div class="toggle-option" style="padding: 10px 20px; cursor: pointer; font-weight: 600;">
-                                        Enter USD Amount
-                                    </div>
-                                    <div class="toggle-option active" style="padding: 10px 20px; cursor: pointer; background-color: var(--primary-blue); color: white; font-weight: 600;">
-                                        Enter Gold Amount
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- USD Amount Input (hidden) -->
-                            <div class="usd-input-container" style="display: none;">
-                                <div class="amount-input">
-                                    <div class="amount-label">USD Amount:</div>
-                                    <div class="amount-field">
-                                        <input type="number" value="1725.00" min="6.90" step="1" class="usd-input">
-                                    </div>
-                                    <div class="grams-label">USD</div>
-                                </div>
-                                
-                                <div style="margin-top: 20px; background-color: var(--card-bg); padding: 15px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <span style="font-size: 14px; color: var(--text-light);">Equivalent to:</span>
-                                        <div style="font-size: 20px; font-weight: bold;">25.0 grams</div>
-                                    </div>
-                                    <div style="color: var(--text-light); font-size: 14px;">
-                                        <div>0.1g ≈ $6.90</div>
-                                        <div>$69.00 per gram</div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Gold Amount Input (visible by default) -->
-                            <div class="gold-input-container">
-                                <div class="amount-input">
-                                    <div class="amount-label">Gold Amount:</div>
-                                    <div class="amount-field">
-                                        <input type="number" value="25.0" min="0.1" max="850.2" step="0.1" class="gold-input">
-                                    </div>
-                                    <div class="grams-label">grams</div>
-                                </div>
-                                <input type="range" min="0.1" max="850.2" value="25" step="0.1" class="amount-slider gold-slider">
-                                <div class="slider-labels">
-                                    <div>0.1g (min.)</div>
-                                    <div>850.2g (max.)</div>
-                                </div>
-                                
-                                <div style="margin-top: 20px; background-color: var(--card-bg); padding: 15px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <span style="font-size: 14px; color: var(--text-light);">Cost:</span>
-                                        <div style="font-size: 20px; font-weight: bold;">$1,725.00</div>
-                                    </div>
-                                    <div style="color: var(--text-light); font-size: 14px;">
-                                        <div>0.1g ≈ $6.90</div>
-                                        <div>$69.00 per gram</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Payment Summary -->
-                <div class="payment-summary">
-                    <div class="summary-title">Order Summary</div>
-                    <div class="summary-item">
-                        <div class="summary-label">Selected Ingot:</div>
-                        <div class="summary-value">Swiss Gold Bar</div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="summary-label">Gold Amount:</div>
-                        <div class="summary-value">25.0 grams</div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="summary-label">Gold Price:</div>
-                        <div class="summary-value">$68.25/g</div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="summary-label">Platform Fee:</div>
-                        <div class="summary-value">$0.75/g</div>
-                    </div>
-                    <div class="summary-item">
-                        <div class="summary-label">Final Price:</div>
-                        <div class="summary-value">$69.00/g</div>
-                    </div>
-                    <div class="summary-total">
-                        <div>Total:</div>
-                        <div>$1,725.00</div>
-                    </div>
-                    <div class="summary-note">
-                        Payment will be processed in USDT. You will receive an NFT representing your gold ownership after the transaction is confirmed on the blockchain.
-                    </div>
-                    <div class="checkout-button">
-                        Confirm Purchase
-                    </div>
-                </div>
-            </div>
-
-            <!-- Confirmation Modal (Hidden by default) -->
-            <div class="modal-backdrop" style="display: none;">
-                <div class="modal-container">
-                    <div class="modal-header">
-                        <div class="modal-title">Confirm Purchase</div>
-                        <div class="modal-close">×</div>
-                    </div>
-                    <div class="modal-content">
-                        <p>You are about to purchase <strong>25.0 grams</strong> of gold from <strong>Swiss Gold Bar</strong> for a total of <strong>$1,725.00 USDT</strong>.</p>
-                        <p>Please confirm this transaction. After confirmation, the payment will be processed and an NFT will be minted to your wallet.</p>
-                    </div>
-                    <div class="modal-actions">
-                        <div class="modal-button cancel-button">Cancel</div>
-                        <div class="modal-button confirm-button">Confirm</div>
-                    </div>
-                </div>
-            </div>
+        <!-- Page Title -->
+        <div class="page-title">
+          <div class="back-button">
+            <span>←</span>
+          </div>
+          <h1>Buy Gold</h1>
         </div>
+
+        <div class="buy-gold-container">
+          <!-- Buy Form -->
+          <div class="buy-form">
+            <div class="form-section">
+              <div class="form-section-title">Select Gold Ingot</div>
+              <div class="ingot-selector">
+                <!-- Ingot 1 -->
+                <div class="ingot-option selected">
+                  <div class="ingot-image">
+                    <img src="/api/placeholder/400/240" alt="Gold Ingot" />
+                  </div>
+                  <div class="ingot-info">
+                    <div class="ingot-id">ID: #A12493</div>
+                    <div class="ingot-name">Swiss Gold Bar</div>
+                    <div class="ingot-available">Available: 850.2g</div>
+                  </div>
+                </div>
+
+                <!-- Ingot 2 -->
+                <div class="ingot-option">
+                  <div class="ingot-image">
+                    <img src="/api/placeholder/400/240" alt="Gold Ingot" />
+                  </div>
+                  <div class="ingot-info">
+                    <div class="ingot-id">ID: #B78512</div>
+                    <div class="ingot-name">London Gold Bar</div>
+                    <div class="ingot-available">Available: 1250.7g</div>
+                  </div>
+                </div>
+
+                <!-- Ingot 3 -->
+                <div class="ingot-option">
+                  <div class="ingot-image">
+                    <img src="/api/placeholder/400/240" alt="Gold Ingot" />
+                  </div>
+                  <div class="ingot-info">
+                    <div class="ingot-id">ID: #X39156</div>
+                    <div class="ingot-name">Dubai Gold Bar</div>
+                    <div class="ingot-available">Available: 500.0g</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <div class="form-section-title">Purchase Amount</div>
+              <div class="amount-section">
+                <!-- Toggle between Dollar or Gold amount -->
+                <div
+                  class="toggle-container"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    margin-bottom: 20px;
+                  "
+                >
+                  <div
+                    class="toggle-options"
+                    style="
+                      display: flex;
+                      background-color: var(--card-bg);
+                      border-radius: 10px;
+                      overflow: hidden;
+                      border: 1px solid var(--border-color);
+                    "
+                  >
+                    <div
+                      class="toggle-option"
+                      style="
+                        padding: 10px 20px;
+                        cursor: pointer;
+                        font-weight: 600;
+                      "
+                    >
+                      Enter USD Amount
+                    </div>
+                    <div
+                      class="toggle-option active"
+                      style="
+                        padding: 10px 20px;
+                        cursor: pointer;
+                        background-color: var(--primary-blue);
+                        color: white;
+                        font-weight: 600;
+                      "
+                    >
+                      Enter Gold Amount
+                    </div>
+                  </div>
+                </div>
+
+                <!-- USD Amount Input (hidden) -->
+                <div class="usd-input-container" style="display: none">
+                  <div class="amount-input">
+                    <div class="amount-label">USD Amount:</div>
+                    <div class="amount-field">
+                      <input
+                        type="number"
+                        value="1725.00"
+                        min="6.90"
+                        step="1"
+                        class="usd-input"
+                      />
+                    </div>
+                    <div class="grams-label">USD</div>
+                  </div>
+
+                  <div
+                    style="
+                      margin-top: 20px;
+                      background-color: var(--card-bg);
+                      padding: 15px;
+                      border-radius: 10px;
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                    "
+                  >
+                    <div>
+                      <span style="font-size: 14px; color: var(--text-light)"
+                        >Equivalent to:</span
+                      >
+                      <div style="font-size: 20px; font-weight: bold">
+                        25.0 grams
+                      </div>
+                    </div>
+                    <div style="color: var(--text-light); font-size: 14px">
+                      <div>0.1g ≈ $6.90</div>
+                      <div>$69.00 per gram</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Gold Amount Input (visible by default) -->
+                <div class="gold-input-container">
+                  <div class="amount-input">
+                    <div class="amount-label">Gold Amount:</div>
+                    <div class="amount-field">
+                      <input
+                        type="number"
+                        value="25.0"
+                        min="0.1"
+                        max="850.2"
+                        step="0.1"
+                        class="gold-input"
+                      />
+                    </div>
+                    <div class="grams-label">grams</div>
+                  </div>
+                  <input
+                    type="range"
+                    min="0.1"
+                    max="850.2"
+                    value="25"
+                    step="0.1"
+                    class="amount-slider gold-slider"
+                  />
+                  <div class="slider-labels">
+                    <div>0.1g (min.)</div>
+                    <div>850.2g (max.)</div>
+                  </div>
+
+                  <div
+                    style="
+                      margin-top: 20px;
+                      background-color: var(--card-bg);
+                      padding: 15px;
+                      border-radius: 10px;
+                      display: flex;
+                      justify-content: space-between;
+                      align-items: center;
+                    "
+                  >
+                    <div>
+                      <span style="font-size: 14px; color: var(--text-light)"
+                        >Cost:</span
+                      >
+                      <div style="font-size: 20px; font-weight: bold">
+                        $1,725.00
+                      </div>
+                    </div>
+                    <div style="color: var(--text-light); font-size: 14px">
+                      <div>0.1g ≈ $6.90</div>
+                      <div>$69.00 per gram</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Payment Summary -->
+          <div class="payment-summary">
+            <div class="summary-title">Order Summary</div>
+            <div class="summary-item">
+              <div class="summary-label">Selected Ingot:</div>
+              <div class="summary-value">Swiss Gold Bar</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-label">Gold Amount:</div>
+              <div class="summary-value">25.0 grams</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-label">Gold Price:</div>
+              <div class="summary-value">$68.25/g</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-label">Platform Fee:</div>
+              <div class="summary-value">$0.75/g</div>
+            </div>
+            <div class="summary-item">
+              <div class="summary-label">Final Price:</div>
+              <div class="summary-value">$69.00/g</div>
+            </div>
+            <div class="summary-total">
+              <div>Total:</div>
+              <div>$1,725.00</div>
+            </div>
+            <div class="summary-note">
+              Payment will be processed in USDT. You will receive an NFT
+              representing your gold ownership after the transaction is
+              confirmed on the blockchain.
+            </div>
+            <div class="checkout-button">Confirm Purchase</div>
+          </div>
+        </div>
+
+        <!-- Confirmation Modal (Hidden by default) -->
+        <div class="modal-backdrop" style="display: none">
+          <div class="modal-container">
+            <div class="modal-header">
+              <div class="modal-title">Confirm Purchase</div>
+              <div class="modal-close">×</div>
+            </div>
+            <div class="modal-content">
+              <p>
+                You are about to purchase <strong>25.0 grams</strong> of gold
+                from <strong>Swiss Gold Bar</strong> for a total of
+                <strong>$1,725.00 USDT</strong>.
+              </p>
+              <p>
+                Please confirm this transaction. After confirmation, the payment
+                will be processed and an NFT will be minted to your wallet.
+              </p>
+            </div>
+            <div class="modal-actions">
+              <div class="modal-button cancel-button">Cancel</div>
+              <div class="modal-button confirm-button">Confirm</div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-</body>
+  </body>
 </html>

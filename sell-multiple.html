@@ -312,6 +312,20 @@
             border-color: var(--primary-blue);
         }
 
+        .nft-checkbox2 {
+            width: 24px;
+            height: 24px;
+            border-radius: 5px;
+            border: 2px solid gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            transition: all 0.2s;
+            border-color: var(--primary-blue);
+        }
+
         .nft-detail-section {
             padding: 15px;
         }
@@ -615,6 +629,8 @@
     </style>
 </head>
 <body>
+
+
     <div class="container">
         <!-- Sidebar -->
         <div class="sidebar">
@@ -758,7 +774,7 @@
                             </div>
                             
                             <!-- NFT 2 - Selected with partial amount -->
-                            <div class="nft-option selected">
+                            <div class="nft-option">
                                 <div class="nft-header-row">
                                     <div class="nft-image">
                                         <img src="/api/placeholder/400/240" alt="Gold NFT">
@@ -772,7 +788,7 @@
                                         <div class="nft-grams">100.0 grams total</div>
                                     </div>
                                     <div class="nft-control">
-                                        <div class="nft-checkbox">✓</div>
+                                        <div class="nft-checkbox2"></div>
                                     </div>
                                 </div>
                                 
@@ -810,9 +826,9 @@
 
                     <div class="form-section">
                         <div class="form-section-title">Sale Options</div>
-                        <div class="sale-options">
+                        <div class="sale-options se">
                             <!-- Normal Sale Option -->
-                            <div class="sale-option selected">
+                            <div class="sale-option">
                                 <div class="sale-option-header">
                                     <div class="sale-title">Normal Sale</div>
                                     <div class="sale-tag tag-normal">Recommended</div>
@@ -915,6 +931,6 @@
                     </div>
                 </div>
             </div>
-
             <!-- Confirmation Modal (Hidden by default) -->
-            <div class="modal-backdrop" style
+            <div class="modal-backdrop" style 
+
